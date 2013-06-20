@@ -46,17 +46,20 @@ or
 set my_var other_var
 
 ```
+
 Standard Library:
-TRUE - bool 
-FALSE - bool
-echo - prints the value of a variable
-inspect - prints the type of a variable
-set - assigns the value of the second argument to the first 
+
+* TRUE - bool 
+* FALSE - bool
+* echo - prints the value of a variable
+* inspect - prints the type of a variable
+* set - assigns the value of the second argument to the first 
 
 Style (optional):
-Constants - Caps, underscore seperating words.
-Commands - Lowercase, underscore seperating words.
-Variables  - Lowercase, underscore seperating words.
+
+* Constants - Caps, underscore seperating words.
+* Commands - Lowercase, underscore seperating words.
+* Variables  - Lowercase, underscore seperating words.
 
 ### Custom Vars: ###
 
@@ -114,6 +117,6 @@ int calculateAverage(ConsoleRef console, ConsoleArgRef args)
 Console_RegisterCommand(console,
                         "avg", /* command name */
                         calculateAverage, /* function pointer */
-                        -1); /* how many arguments (-1 means whatever) ? */
+                        -1); /* how many arguments (-1 indicates a variable number) ? */
 						
 ```
