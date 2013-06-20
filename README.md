@@ -5,7 +5,7 @@ A Quake style debug console for games.
 * Portable - ANSI C
 * Easy Integration - A single header and source file for the console, and one for the default library.
 * Clean - Well designed opaque data structures.
-* Simple - Easily add new commands and variables.
+* Simple - Easily add new commands and variables. If more complexity is needed (returns, complex expressions etc.) check out [lua](http://lua.org) instead.
 * Persitent - Save and load and console states.
 
 ### Integration: ###
@@ -36,7 +36,7 @@ Console_Destroy(console);
 Commands take the simple form of:
 
 ```
-command_name arg1 arg2 etc
+command_name arg1 arg2 argN...
 
 Example:
 set my_var 40
@@ -62,11 +62,24 @@ Variables  - Lowercase, underscore seperating words.
 
 ```C
 
+/* registration */
 ConsoleVarRef myVar = Console_RegisterVar(console,
                                           "my_var", /* var name */
                                           kConsoleVarTypeInt, /* int type */
                                           kConsoleVarFlagReadonly); /* make this readonly by the console */
 										  
+...
+
+/* access outside of console */
+
+/* find or use cached */
+ConsoleVarRef myVar = Console_FindVar("my_var");
+
+/* get value */
+int val = ConsoleVar_IntValue(myVar);
+
+/* assignment */
+ConsoleVar_SetIntValue(myVar, 100);
 
 
 ```
@@ -75,6 +88,7 @@ ConsoleVarRef myVar = Console_RegisterVar(console,
 ### Custom Commands: ###
 ```C 
 
+/* sample command function */
 int calculateAverage(ConsoleRef console, ConsoleArgRef args)
 {
 	ConsoleArgRef arg = args;
@@ -96,7 +110,7 @@ int calculateAverage(ConsoleRef console, ConsoleArgRef args)
 	return 1;
 }
 
-/* register a command */
+/* registration */
 Console_RegisterCommand(console,
                         "avg", /* command name */
                         calculateAverage, /* function pointer */
