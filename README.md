@@ -8,7 +8,7 @@ A Quake style debug console for games.
 * Simple - Easily add new commands and variables.
 * Persitent - Save and load and console states.
 
-Integration:
+## Integration: ##
 
 ```C 
 
@@ -22,8 +22,7 @@ ConsoleRef console = Console_Create(stdout);
 ConsoleStdLib_Register(console);
 
 /* execute functions */
-
-....
+Console_Execute(...)
 Console_Execute(...)
 ....
 
