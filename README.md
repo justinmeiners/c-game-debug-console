@@ -55,11 +55,6 @@ Standard Library:
 * **inspect** - prints the type of a variable
 * **set** - assigns the value of the second argument to the first 
 
-Style (optional):
-
-* **Constants** - Caps, underscore seperating words.
-* **Commands** - Lowercase, underscore seperating words.
-* **Variables**  - Lowercase, underscore seperating words.
 
 ### Custom Variables: ###
 
