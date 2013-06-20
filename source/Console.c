@@ -223,6 +223,16 @@ void Console_Destroy(ConsoleRef console)
 {
     if (console)
     {
+        int i;
+        for (i = 0; i < console->commandCount; i ++)
+        {
+            free(console->commands[i]);
+        }
+        
+        for (i = 0; i < console->varCount; i ++)
+        {
+            free(console->vars[i]);
+        }
         free(console);
     }
 }
@@ -297,8 +307,8 @@ int Console_Load(ConsoleRef console, FILE* inFile)
     assert(console);
     assert(inFile);
     
-    char varName[128];
-    char varValue[1024];
+    char varName[CONSOLE_VAR_NAME_MAX];
+    char varValue[CONSOLE_VAR_STRING_MAX];
     
     while (!feof(inFile))
     {

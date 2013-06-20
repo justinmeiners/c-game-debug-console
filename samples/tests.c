@@ -17,7 +17,6 @@ int main(int argc, const char * argv[])
     Console_RegisterVar(console, "test_int", kConsoleVarTypeInt, 0);
     Console_RegisterVar(console, "test_double", kConsoleVarTypeDouble, 0);
 
-    
     /* var identification */
     Console_Execute(console, "inspect TRUE");
     /* int literal identification */
