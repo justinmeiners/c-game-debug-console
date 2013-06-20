@@ -2,7 +2,7 @@ C Game Debug Console
 ====================
 
 A Quake style debug console for games.
-* **Portable** - ANSI C
+* **Portable** - ANSI C + Standard Library
 * **Easy Integration** - A single header and source file for the console, and one for the default library.
 * **Clean** - Well designed interface with opaque data structures.
 * **Simple** - Simple design and featureset. Easily add new commands and variables. If more complexity is needed (arrays, returns, complex expressions etc.) a complete scripting language may be more appropriate. Check out [lua](http://lua.org) instead.
