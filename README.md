@@ -61,22 +61,24 @@ Style (optional):
 * **Commands** - Lowercase, underscore seperating words.
 * **Variables**  - Lowercase, underscore seperating words.
 
-### Custom Vars: ###
+### Custom Variables: ###
 
 ```C
 
 /* registration */
 ConsoleVarRef myVar = Console_RegisterVar(console,
-                                          "my_var_", /* var name (caps for constant, see style)*/
+                                          "my_var", /* variable name */
                                           kConsoleVarTypeInt, /* int type */
                                           0); /* flags - readonly, etc (none used) */
 
 										   
 ...
+...
+...
 
-/* access outside of console */
+/* access outside of console in C code */
 
-/* find or use cached */
+/* find handle or use cached */
 ConsoleVarRef myVar = Console_FindVar("my_var");
 
 /* get value */
@@ -84,7 +86,6 @@ int val = ConsoleVar_IntValue(myVar);
 
 /* assignment */
 ConsoleVar_SetIntValue(myVar, 100);
-
 
 ```
 
