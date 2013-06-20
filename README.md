@@ -2,11 +2,11 @@ C Game Debug Console
 ====================
 
 A Quake style debug console for games.
-* Portable - ANSI C
-* Easy Integration - A single header and source file for the console, and one for the default library.
-* Clean - Well designed opaque data structures.
-* Simple - Easily add new commands and variables. If more complexity is needed (returns, complex expressions etc.) check out [lua](http://lua.org) instead.
-* Persitent - Save and load and console states.
+* **Portable** - ANSI C
+* **Easy Integration** - A single header and source file for the console, and one for the default library.
+* **Clean** - Well designed interface with opaque data structures.
+* **Simple** - Easily add new commands and variables. If more complexity is needed (returns, complex expressions etc.) check out [lua](http://lua.org) instead.
+* **Persitent** - Save and load and console states.
 
 ### Integration: ###
 
@@ -49,17 +49,17 @@ set my_var other_var
 
 Standard Library:
 
-* TRUE - bool 
-* FALSE - bool
-* echo - prints the value of a variable
-* inspect - prints the type of a variable
-* set - assigns the value of the second argument to the first 
+* **TRUE** - bool 1
+* **FALSE** - bool 0
+* **echo** - prints the value of a variable
+* **inspect** - prints the type of a variable
+* **set** - assigns the value of the second argument to the first 
 
 Style (optional):
 
-* Constants - Caps, underscore seperating words.
-* Commands - Lowercase, underscore seperating words.
-* Variables  - Lowercase, underscore seperating words.
+* **Constants** - Caps, underscore seperating words.
+* **Commands** - Lowercase, underscore seperating words.
+* **Variables**  - Lowercase, underscore seperating words.
 
 ### Custom Vars: ###
 
@@ -67,10 +67,11 @@ Style (optional):
 
 /* registration */
 ConsoleVarRef myVar = Console_RegisterVar(console,
-                                          "my_var", /* var name */
+                                          "my_var_", /* var name (caps for constant, see style)*/
                                           kConsoleVarTypeInt, /* int type */
-                                          kConsoleVarFlagReadonly); /* make this readonly by the console */
-										  
+                                          0); /* flags - readonly, etc (none used) */
+
+										   
 ...
 
 /* access outside of console */
