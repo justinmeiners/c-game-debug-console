@@ -1,4 +1,6 @@
 /*
+ By: Justin Meiners
+
  Copyright (c) 2013 Inline Studios
  Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
  */
@@ -7,6 +9,21 @@
 #define CONSOLE_H
 
 #include <stdio.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+    
+#define CONSOLE_VERSION_1_0 0
+    
+#define CONSOLE_VERSION CONSOLE_VERSION_1_0
+
+    /*
+     v1.0:
+     - Initial release
+     
+     
+     */
 
 typedef enum
 {
@@ -89,4 +106,8 @@ extern ConsoleVarRef Console_RegisterVar(ConsoleRef console,
 /* exectue a command string, returns success */
 extern int Console_Execute(ConsoleRef console, const char* command);
 
+#ifdef __cplusplus
+}
+#endif
+    
 #endif
