@@ -10,7 +10,15 @@
 
 #include "Console.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* standard functions */
 extern void ConsoleStdLib_Register(ConsoleRef console);
 
+#ifdef __cplusplus
+}
+#endif
+    
 #endif
