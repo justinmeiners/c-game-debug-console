@@ -20,6 +20,10 @@
 
 #define CONSOLE_MAX_TOKENS 128
 
+static void *(*_Console_Malloc)(size_t sz) = malloc;
+static void (*_Console_Free)(void *ptr) = free;
+
+
 struct ConsoleVar
 {
     char name[CONSOLE_VAR_NAME_MAX];
@@ -52,7 +56,7 @@ struct Console
 
 static ConsoleVarRef _ConsoleVar_Create(ConsoleVarType_t type, int temporary)
 {
-    ConsoleVarRef var = malloc(sizeof(struct ConsoleVar));
+    ConsoleVarRef var = _Console_Malloc(sizeof(struct ConsoleVar));
     
     if (var)
     {
@@ -64,6 +68,12 @@ static ConsoleVarRef _ConsoleVar_Create(ConsoleVarType_t type, int temporary)
     }
     
     return var;
+}
+
+void Console_InstallAllocators(void *(*mallocFunc)(size_t sz), void (*freeFunc)(void *ptr))
+{
+    _Console_Malloc = mallocFunc;
+    _Console_Free = freeFunc;
 }
 
 ConsoleVarType_t ConsoleVar_Type(ConsoleVarRef var)
@@ -169,7 +179,7 @@ const char* ConsoleVar_StringValue(ConsoleVarRef var)
 
 static ConsoleCommandRef _ConsoleCommand_Create()
 {
-    ConsoleCommandRef command = malloc(sizeof(struct ConsoleCommand));
+    ConsoleCommandRef command = _Console_Malloc(sizeof(struct ConsoleCommand));
     
     if (command)
     {
@@ -203,7 +213,7 @@ ConsoleRef Console_Create(FILE* logfile)
         return NULL;
     }
     
-    ConsoleRef console = malloc(sizeof(struct Console));
+    ConsoleRef console = _Console_Malloc(sizeof(struct Console));
     
     if (console)
     {
@@ -228,14 +238,14 @@ void Console_Destroy(ConsoleRef console)
         int i;
         for (i = 0; i < console->commandCount; i ++)
         {
-            free(console->commands[i]);
+            _Console_Free(console->commands[i]);
         }
         
         for (i = 0; i < console->varCount; i ++)
         {
-            free(console->vars[i]);
+            _Console_Free(console->vars[i]);
         }
-        free(console);
+        _Console_Free(console);
     }
 }
 
@@ -410,7 +420,7 @@ ConsoleVarRef Console_RegisterVar(ConsoleRef console,
 
 static ConsoleArgRef _ArgCreate(ConsoleVarRef var)
 {
-    ConsoleArgRef arg = malloc(sizeof(struct ConsoleArg));
+    ConsoleArgRef arg = _Console_Malloc(sizeof(struct ConsoleArg));
     arg->var = var;
     arg->next = NULL;
     return arg;
@@ -512,9 +522,9 @@ static void _Console_FreeArgChain(ConsoleArgRef arg)
         
         if (it->var->temp)
         {
-            free(it->var);
+            _Console_Free(it->var);
         }
-        free(it);
+        _Console_Free(it);
         
         it = next;
     }

@@ -15,15 +15,18 @@ extern "C" {
 #endif
     
 #define CONSOLE_VERSION_1_0 0
-    
-#define CONSOLE_VERSION CONSOLE_VERSION_1_0
+#define CONSOLE_VERSION_1_1 1
 
-    /*
-     v1.0:
-     - Initial release
-     
-     
-     */
+#define CONSOLE_VERSION CONSOLE_VERSION_1_1
+
+/*
+ v1.0:
+ - Initial release
+ 
+ v1.1:
+ - Custom Memory alloactor support
+ 
+ */
 
 typedef enum
 {
@@ -56,6 +59,10 @@ struct ConsoleArg
 
 typedef int (*ConsoleFunc_t)(ConsoleRef console, ConsoleArgRef arguments);
 
+/* for custom allocators */
+extern void Console_InstallAllocators(void *(*mallocFunc)(size_t sz), void (*freeFunc)(void *ptr));
+
+    
 /* ConsoleVar */
 extern ConsoleVarType_t ConsoleVar_Type(ConsoleVarRef var);
 extern int ConsoleVar_Readonly(ConsoleVarRef var);
